@@ -1,2 +1,2 @@
-# IAP
-Internet Application Programming Repository
+# API
+Application Programming Repository
