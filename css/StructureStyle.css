@@ -1,0 +1,39 @@
+@font-face { font-family: Montserrat; src: url('font/Montserrat-VariableFont_wght.ttf'); }
+
+    *{
+        box-sizing: border-box;
+        font-family: 1em Montserrat;
+        
+    }
+
+    body{
+        margin: 0;
+        }
+    
+    .topnav{
+        background-color: #a7f740;
+        overflow: hidden;
+    }
+    
+    .topnav a{
+        color: azure;
+        float: left;
+        display: block;
+        text-decoration: none;
+        text-align: left;
+        padding: 14px 16px;
+    }
+    
+    .topnav a:hover{
+        color:black;
+        background-color: azure;
+    }
+    
+    
+    .footer{
+        background-color: black;
+        padding-top: 20px;
+        padding: 20px;
+        text-align: center;
+        color: azure;
+    }

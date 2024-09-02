@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>This is my First Page</h1>
+<?php
+    require_once "load.php";
+    $ObjLayouts->heading();
+    $ObjMenus->main_menu();
+    $ObjLayouts->footer();
 
-    <?php
-        require_once "load.php";
+?>
 
-        print $Obj->user_age("Ivan", 2005);
-        print '<br>';
-    ?>
-</body>
-</html>
