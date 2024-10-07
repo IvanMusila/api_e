@@ -32,7 +32,7 @@
             ?>
               <div class="p-3 mb-4 bg-body-tertiary rounded-3">
                 <div class="container-fluid py-2">
-                  <h1 class="display-5 fw-bold">Assignemnt II</h1>
+                  <h1 class="display-5 fw-bold">Welcome to Ivan's IAP Assignment</h1>
                   <p class="col-md-8 fs-4">This is an individual assignment. We assume that you already know how to set up a localhost server(s): & MySQL database and Apache web servers.<br>If not, your instructor will assist you to set it up.  </p>
                   <button class="btn btn-primary btn-lg" type="button">Example button</button>
                 </div>
