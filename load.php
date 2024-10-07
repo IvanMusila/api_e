@@ -1,4 +1,6 @@
 <?php 
+require "includes/constants.php";
+require "includes/dbConnection.php";
 function ClassAutoload($Classname){
     $directories = ["forms", "processes", "structure", "tables", "globals","store","includes"];
 
@@ -14,13 +16,14 @@ function ClassAutoload($Classname){
 }
 spl_autoload_register('ClassAutoload');
 
+$ObjGlob = new fncs();
+
 $ObjLayouts= new layouts();
 $ObjMenus= new menus();
 $ObjContents= new contents();
+$Objforms = new forms();
 
 
-require "includes/constants.php";
-require "includes/dbConnection.php";
 
 $conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
 
