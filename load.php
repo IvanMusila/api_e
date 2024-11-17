@@ -25,6 +25,11 @@ $Objforms = new forms();
 
 
 
+//$conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
+
 $conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
+// Creating process intances
+   $ObjAuth = new auth();
+   $ObjAuth->signup($conn);
 
 
