@@ -63,7 +63,7 @@ if(!count($errors)){
     
     $cols = ['fullname', 'email', 'username', 'ver_code', 'ver_code_time'];
     $vals = [$fullname, $email_address, $username, $conf['verification_code'], $conf['ver_code_time']];
-    
+
     $data = array_combine($cols, $vals);
     $insert = $conn->insert('users', $data);
     if($insert === TRUE){
@@ -77,7 +77,7 @@ if(!count($errors)){
             'message' => $this->bind_to_template($replacements, $lang["AccRegVer_template"])
         ]);
         
-        header('Location: signup.php');
+        header('Location: verify_code.php');
         unset($_SESSION["fullname"], $_SESSION["email_address"], $_SESSION["username"]);
         exit();
     }else{
@@ -88,4 +88,27 @@ if(!count($errors)){
    }
    }
  }
+ public function verify_code($conn, $ObjGlob, $ObjSendMail, $lang, $conf){
+    if(isset($_POST["verify_code"])){
+        $errors = array();
+        $ver_code = $_SESSION["ver_code"] = $conn->escape_values($_POST["ver_code"]."454");
+        if(!is_numeric($ver_code)){
+            $errors['Not_numeric'] = "Invalid code. The code should be a digit";
+        }
+        if(strlen($ver_code < 5) || strlen($ver_code > 5) ) {
+            $errors['invalid_len'] = "Invalid code. The code should have 5 digits";
+        }
+        // Verify verification code Exists
+        $spot_ver_code_res = $conn->count_results(sprintf("SELECT ver_code FROM users WHERE ver_code = '%d' LIMIT 1", $ver_code));
+        if ($spot_ver_code_res != 1){
+            $errors['ver_code_not_exist'] = "Invalid code.";
+        }
+        if(!count($errors)){
+            die('All Correct');
+        }else{
+            $ObjGlob->setMsg('msg', 'Error(s)', 'invalid');
+            $ObjGlob->setMsg('errors', $errors, 'invalid');
+        }
+        }
+    }
 }
