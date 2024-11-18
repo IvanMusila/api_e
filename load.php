@@ -19,6 +19,7 @@ function ClassAutoload($Classname){
 spl_autoload_register('ClassAutoload');
 
 $ObjGlob = new fncs();
+$ObjSendMail = new SendMail();
 
 $ObjLayouts= new layouts();
 $ObjMenus= new menus();
@@ -31,7 +32,7 @@ $Objforms = new forms();
 
 $conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
 // Creating process intances
-   $ObjAuth = new auth();
-   $ObjAuth->signup($conn, $ObjGlob);
+$ObjAuth = new auth();
+$ObjAuth->signup($conn, $ObjGlob, $ObjSendMail, $lang, $conf);
 
 
