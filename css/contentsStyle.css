@@ -1,0 +1,14 @@
+.content, .sidebar, .abt_img{
+    width: 100%;
+}
+
+.invalid{
+    color: rgb(255, 0, 0);
+    font-size: smaller;
+}
+.invalid-feedback{
+	color: #500203;
+	}
+.valid-feedback{
+	color: #223d00;
+	}

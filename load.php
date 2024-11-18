@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require "includes/constants.php";
 require "includes/dbConnection.php";
 function ClassAutoload($Classname){
@@ -30,6 +31,6 @@ $Objforms = new forms();
 $conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
 // Creating process intances
    $ObjAuth = new auth();
-   $ObjAuth->signup($conn);
+   $ObjAuth->signup($conn, $ObjGlob);
 
 
