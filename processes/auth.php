@@ -61,8 +61,9 @@ if (!ctype_alpha($username)) {
 if(!count($errors)){
     
     
-    $cols = ['fullname', 'email', 'username'];
-    $vals = [$fullname, $email_address, $username];
+    $cols = ['fullname', 'email', 'username', 'ver_code', 'ver_code_time'];
+    $vals = [$fullname, $email_address, $username, $conf['verification_code'], $conf['ver_code_time']];
+    
     $data = array_combine($cols, $vals);
     $insert = $conn->insert('users', $data);
     if($insert === TRUE){
