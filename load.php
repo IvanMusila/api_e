@@ -2,6 +2,7 @@
 session_start();
 require "includes/constants.php";
 require "includes/dbConnection.php";
+require "lang/en.php";
 function ClassAutoload($Classname){
     $directories = ["forms", "processes", "structure", "tables", "globals","store","includes"];
 
