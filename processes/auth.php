@@ -24,9 +24,6 @@ if(!filter_var($email_address, FILTER_VALIDATE_EMAIL)){
     $errors['email_format_err'] = 'Wrong email format';
 }
 
-// verify that the email address domain is authorized (@strathmore.edu, gmail.com) not (@yanky.net)
-$conf['valid_domains'] = ["strathmore.edu", "gmail.com", "yahoo.com", "mada.co.ke", "outlook.com", "STRATHMORE.EDU", "GMAIL.COM", "YAHOO.COM", "MADA.CO.KE", "OUTLOOK.COM"];
-
 // verify that the new email address does not exist already in the database
 
 $arr_email_address = explode("@", $email_address);
@@ -56,8 +53,8 @@ if ($spot_username_res > $exist_count){
 
 // Verify if username contain letters only
 if (!ctype_alpha($username)) {
-    $errors['usernameLetters_err'] = "Invalid username format. Username must contain letters only";
-    $ObjGlob->setMsg('errors', $errors, 'invalid');
+    $errors['usernameLetters_err'] = "Invalid username format. 
+        Username must contain letters only without space";
 }
 
 
