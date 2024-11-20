@@ -4,7 +4,7 @@ require "includes/constants.php";
 require "includes/dbConnection.php";
 require "lang/en.php";
 function ClassAutoload($Classname){
-    $directories = ["forms", "processes", "structure", "tables", "globals","store","includes"];
+    $directories = ["forms", "processes", "structure", "tables", "globals","store","includes", "plugins","lang"];
 
     foreach($directories as $dir){
         $Filename = dirname(__FILE__) . DIRECTORY_SEPARATOR .$dir. DIRECTORY_SEPARATOR. $Classname.'.php';   

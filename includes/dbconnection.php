@@ -1,6 +1,8 @@
 <?php
 class dbconnection{
     private $connection;
+    private $posted_values;
+    
     private $db_type;
     private $db_host;
     private $db_port;
@@ -11,7 +13,7 @@ class dbconnection{
     public function __construct($db_type, $db_host, $db_port, $db_user, $db_pass, $db_name){
         $this->db_type = $db_type;
         $this->db_host = $db_host;
-        $this->db_user = $db_port;
+        $this->db_port = $db_port;
         $this->db_user = $db_user;
         $this->db_pass = $db_pass;
         $this->db_name = $db_name;
@@ -48,9 +50,6 @@ class dbconnection{
     public function escape_values($posted_values): string
 {
     switch ($this->db_type) {
-        case 'MySQLi':
-            $this->posted_values = $this->connection->real_escape_string($posted_values);
-            break;
         case 'PDO':
             $this->posted_values = addslashes($posted_values);
             break;
@@ -62,14 +61,7 @@ class dbconnection{
 ***************************************************************************************************/
 public function count_results($sql){
     switch ($this->db_type) {
-        case 'MySQLi':
-            if(is_object($this->connection->query($sql))){
-                $result = $this->connection->query($sql);
-                return $result->num_rows;
-            }else{
-                print "Error 5: " . $sql . "<br />" . $this->connection->error . "<br />";
-            }
-            break;        
+                
         case 'PDO':
             $res = $this->connection->prepare($sql);
             $res->execute();
@@ -95,7 +87,7 @@ public function select($sql){
     switch ($this->db_type) {
         case 'MySQLi':
             $result = $this->connection->query($sql);
-            return $result->fetch_assoc();
+            return $result->fetch();
             break;
         case 'PDO':
             $result = $this->connection->prepare($sql);
@@ -111,7 +103,7 @@ public function select_while($sql){
     switch ($this->db_type) {
         case 'MySQLi':
             $result = $this->connection->query($sql);
-            for ($res = array (); $row = $result->fetch_assoc(); $res[] = $row);
+            for ($res = array (); $row = $result->fetch(); $res[] = $row);
             return $res;
             break;        
         case 'PDO':
@@ -175,16 +167,18 @@ public function truncate($table){
 /**************************************************************************************************
 * Get ID of Last Inserted Record Method
 ***************************************************************************************************/
+/*
 public function last_id(){
     switch ($this->db_type) {
         case 'MySQLi':
             return $this->connection->insert_id;
-        break;    
+            
         case 'PDO':
             return $this->connection->lastInsertId();
-        break;
+        
     }
 }	
+*/    
 /**************************************************************************************************
 * Extracted (tested) Method
 ***************************************************************************************************/
@@ -199,9 +193,8 @@ public function extracted(string $sth)
             if ($this->connection->query($sth) === TRUE) {
                 return TRUE;
             } else {
-                return "Error: " . $sth . "<br>" . $this->connection->error;
-            }
-            break;        
+                return "Error: " . $sth . "<br>" . $this->connection->errorInfo()[2];
+            }        
         case 'PDO':
             try {
                 // Prepare statement
@@ -212,7 +205,7 @@ public function extracted(string $sth)
             } catch (PDOException $e) {
                 return $sth . "<br>" . $e->getMessage();
             }
-            break;
+            
     }
 }
 }

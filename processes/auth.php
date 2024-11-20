@@ -81,21 +81,25 @@ if(!count($errors)){
         unset($_SESSION["fullname"], $_SESSION["email_address"], $_SESSION["username"]);
         exit();
     }else{
+        die($insert);
+    }
+    }else{
         $ObjGlob->setMsg('msg', 'Error(s)', 'invalid');
         $ObjGlob->setMsg('errors', $errors, 'invalid');
+        
     }
         
    }
    }
- }
+
  public function verify_code($conn, $ObjGlob, $ObjSendMail, $lang, $conf){
     if(isset($_POST["verify_code"])){
         $errors = array();
-        $ver_code = $_SESSION["ver_code"] = $conn->escape_values($_POST["ver_code"]."454");
+        $ver_code = $_SESSION["ver_code"] = $conn->escape_values($_POST["ver_code"]);
         if(!is_numeric($ver_code)){
             $errors['Not_numeric'] = "Invalid code. The code should be a digit";
         }
-        if(strlen($ver_code < 5) || strlen($ver_code > 5) ) {
+        if(strlen($ver_code) < 5 || strlen($ver_code) > 5) {
             $errors['invalid_len'] = "Invalid code. The code should have 5 digits";
         }
         // Verify verification code Exists
